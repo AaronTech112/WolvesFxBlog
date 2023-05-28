@@ -94,7 +94,21 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES['default'] = dj_database_url.config()
+ 
+DATABASES = {
+
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'g9ZOY50RY7Z3quxvDCho',
+        'HOST': 'containers-us-west-178.railway.app',
+        'PORT': '7344',
+
+    }
+
+}
 
 
 # Password validation
