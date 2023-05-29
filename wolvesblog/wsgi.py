@@ -1,5 +1,5 @@
 """
-WSGI config for wolvesblog project.
+WSGI config for myshop project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
