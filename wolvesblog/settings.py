@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import whitenoise
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,14 +54,14 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'blog.User'
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 ]
 
 ROOT_URLCONF = 'wolvesblog.urls'
@@ -133,9 +135,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 
-STATIC_URL = '/static/'
-STATIC_FILES_DIR = os.path.join(BASE_DIR, 'static')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_DIRS =(os.path.join(BASE_DIR,'static'),)
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 # STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 # STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
@@ -151,6 +155,8 @@ MEDIA_ROOT =os.path.join(BASE_DIR,'media')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 
 # db_from_env = dj_database_url.config(conn_max_age=500)
 
